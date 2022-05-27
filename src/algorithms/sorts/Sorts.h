@@ -5,6 +5,8 @@
 
 void selection_sort(std::vector<int>& input);
 
+void selection_sort_recursive(std::vector<int>& input, const int index = 0);
+
 void insert_sort(std::vector<int>& input);
 
 void merge_sort_recursive(std::vector<int>& input, const int right, const int left);

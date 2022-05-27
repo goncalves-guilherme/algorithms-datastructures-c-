@@ -1,5 +1,8 @@
 #include "Sorts.h"
 
+int selection_sort_recursive_find_minimum(std::vector<int>& input, const int index);
+void merge(std::vector<int>& input, const int begin, const int mid, const int end);
+
 // Find the minimum and accumulate in the index i++ where i starts in 0
 void selection_sort(std::vector<int>& input)
 {
@@ -20,6 +23,38 @@ void selection_sort(std::vector<int>& input)
         input[i] = input[min]; 
         input[min] = temp; 
     }
+}
+
+int selection_sort_recursive_find_minimum(std::vector<int>& input, const int index)
+{
+    if(index == input.size() - 1)
+    {
+        return index;
+    }
+
+    int k = selection_sort_recursive_find_minimum(input, index + 1);
+
+    return input[index] > input[k] ? k : index;
+}
+
+void selection_sort_recursive(std::vector<int>& input, const int index)
+{
+    if(index == input.size())
+    {
+        return;
+    }
+
+    const int m = selection_sort_recursive_find_minimum(input, index);
+
+    if(index != m)
+    {
+        const int temp = input[index];
+        
+        input[index] = input[m];
+        input[m] = temp;
+    }
+
+    selection_sort_recursive(input, index + 1);
 }
 
 // Iterate over the list and shift your current value until it is less than the one on its left
@@ -116,7 +151,6 @@ void merge_sort_recursive(std::vector<int>& input, const int begin, const int en
     merge(input, begin, medium, end);
 }
 
-void merge_sort(std::vector<int>& input)
-{
-    
-}
+/*void merge_sort(std::vector<int>& input)
+{   
+}*/
